@@ -1,21 +1,12 @@
-## Feature Engineering & Reference Dataset
+## Model Training & Evaluation
 
-This project includes a dedicated **feature engineering layer** that transforms raw customer data into model-ready features and produces a **reference feature dataset** representing the training-time data distribution.
+The project includes standardized scripts for model training and evaluation using the engineered reference features.
 
-### Feature pipeline
-A reusable preprocessing pipeline is implemented in `features/build_features.py` with the following transformations:
-- Categorical features are encoded using **One-Hot Encoding**
-- Numerical features are standardized using **Standard Scaling**
-- Feature names are explicitly generated to preserve schema clarity and support monitoring
+### Training
+- The model is trained using features from the reference dataset
+- The trained model is serialized for reuse and deployment
 
-### Reference dataset
-The transformed features are saved as a **reference dataset**:
-
-- `data/reference/reference_features.parquet`
-
-This dataset serves as the **baseline distribution** for:
-- Data drift detection
-- Comparison with future production data
-- Informed model retraining decisions
-
-Separating raw data, feature construction, and reference storage enables reliable monitoring and aligns the system with production-grade MLOps practices.
+### Evaluation
+- Performance is evaluated on a held-out test split
+- Metrics include precision, recall, ROC-AUC, and a confusion matrix
+- Evaluation results are persisted for traceability
