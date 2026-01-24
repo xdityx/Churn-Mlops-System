@@ -1,0 +1,227 @@
+{
+    "gender_Female": {
+        "psi": 8.921537278438212e-06,
+        "ks_stat": 0.49680056878777107,
+        "ks_pvalue": 0.0
+    },
+    "gender_Male": {
+        "psi": 8.921537278438212e-06,
+        "ks_stat": 0.503199431212229,
+        "ks_pvalue": 0.0
+    },
+    "Partner_No": {
+        "psi": 0.00013283517367932628,
+        "ks_stat": 0.5117312477781728,
+        "ks_pvalue": 0.0
+    },
+    "Partner_Yes": {
+        "psi": 0.00013283517367932628,
+        "ks_stat": 0.48826875222182725,
+        "ks_pvalue": 0.0
+    },
+    "Dependents_No": {
+        "psi": 0.00020175520517126184,
+        "ks_stat": 0.694987557767508,
+        "ks_pvalue": 0.0
+    },
+    "Dependents_Yes": {
+        "psi": 0.00020175520517126184,
+        "ks_stat": 0.305012442232492,
+        "ks_pvalue": 3.715369117413017e-257
+    },
+    "PhoneService_No": {
+        "psi": 1.7428142468814327e-05,
+        "ks_stat": 0.0979381443298969,
+        "ks_pvalue": 1.5466951422377814e-26
+    },
+    "PhoneService_Yes": {
+        "psi": 1.7428142468814327e-05,
+        "ks_stat": 0.9020618556701031,
+        "ks_pvalue": 0.0
+    },
+    "MultipleLines_No": {
+        "psi": 4.6627869929065964e-05,
+        "ks_stat": 0.47795947387131177,
+        "ks_pvalue": 0.0
+    },
+    "MultipleLines_No phone service": {
+        "psi": 1.7428142468814327e-05,
+        "ks_stat": 0.0979381443298969,
+        "ks_pvalue": 1.5466951422377814e-26
+    },
+    "MultipleLines_Yes": {
+        "psi": 1.936511971052387e-05,
+        "ks_stat": 0.42410238179879134,
+        "ks_pvalue": 1.26e-321
+    },
+    "InternetService_DSL": {
+        "psi": 0.00014345008299515216,
+        "ks_stat": 0.34927124066832566,
+        "ks_pvalue": 8.147e-321
+    },
+    "InternetService_Fiber optic": {
+        "psi": 3.6974372616056623e-05,
+        "ks_stat": 0.4372555990046214,
+        "ks_pvalue": 0.0
+    },
+    "InternetService_No": {
+        "psi": 4.263272711992806e-05,
+        "ks_stat": 0.21347316032705296,
+        "ks_pvalue": 3.6941561180996304e-125
+    },
+    "OnlineSecurity_No": {
+        "psi": 4.954262439338894e-05,
+        "ks_stat": 0.4937788837539993,
+        "ks_pvalue": 0.0
+    },
+    "OnlineSecurity_No internet service": {
+        "psi": 4.263272711992806e-05,
+        "ks_stat": 0.21347316032705296,
+        "ks_pvalue": 3.6941561180996304e-125
+    },
+    "OnlineSecurity_Yes": {
+        "psi": 0.000186876656326232,
+        "ks_stat": 0.29274795591894776,
+        "ks_pvalue": 1.2745815397720784e-236
+    },
+    "OnlineBackup_No": {
+        "psi": 9.884162198482033e-07,
+        "ks_stat": 0.43849982225382156,
+        "ks_pvalue": 0.0
+    },
+    "OnlineBackup_No internet service": {
+        "psi": 4.263272711992806e-05,
+        "ks_stat": 0.21347316032705296,
+        "ks_pvalue": 3.6941561180996304e-125
+    },
+    "OnlineBackup_Yes": {
+        "psi": 4.451963433838507e-05,
+        "ks_stat": 0.3480270174191255,
+        "ks_pvalue": 8.256e-321
+    },
+    "DeviceProtection_No": {
+        "psi": 1.3810774989527537e-05,
+        "ks_stat": 0.4381443298969072,
+        "ks_pvalue": 0.0
+    },
+    "DeviceProtection_No internet service": {
+        "psi": 4.263272711992806e-05,
+        "ks_stat": 0.21347316032705296,
+        "ks_pvalue": 3.6941561180996304e-125
+    },
+    "DeviceProtection_Yes": {
+        "psi": 9.050660339596399e-05,
+        "ks_stat": 0.3483825097760398,
+        "ks_pvalue": 8.226e-321
+    },
+    "TechSupport_No": {
+        "psi": 1.3155983635152318e-05,
+        "ks_stat": 0.4955563455385709,
+        "ks_pvalue": 0.0
+    },
+    "TechSupport_No internet service": {
+        "psi": 4.263272711992806e-05,
+        "ks_stat": 0.21347316032705296,
+        "ks_pvalue": 3.6941561180996304e-125
+    },
+    "TechSupport_Yes": {
+        "psi": 3.6560562743641107e-06,
+        "ks_stat": 0.2909704941343761,
+        "ks_pvalue": 1.016719432522312e-233
+    },
+    "StreamingTV_No": {
+        "psi": 4.187879692117129e-06,
+        "ks_stat": 0.4004621400639886,
+        "ks_pvalue": 3.5e-321
+    },
+    "StreamingTV_No internet service": {
+        "psi": 4.263272711992806e-05,
+        "ks_stat": 0.21347316032705296,
+        "ks_pvalue": 3.6941561180996304e-125
+    },
+    "StreamingTV_Yes": {
+        "psi": 1.1903860938938116e-05,
+        "ks_stat": 0.3860646996089584,
+        "ks_pvalue": 4.83e-321
+    },
+    "StreamingMovies_No": {
+        "psi": 4.756708286720385e-05,
+        "ks_stat": 0.39210806967650197,
+        "ks_pvalue": 4.274e-321
+    },
+    "StreamingMovies_No internet service": {
+        "psi": 4.263272711992806e-05,
+        "ks_stat": 0.21347316032705296,
+        "ks_pvalue": 3.6941561180996304e-125
+    },
+    "StreamingMovies_Yes": {
+        "psi": 0.00015372837495741066,
+        "ks_stat": 0.3944187699964451,
+        "ks_pvalue": 4.06e-321
+    },
+    "Contract_Month-to-month": {
+        "psi": 9.867646487142822e-07,
+        "ks_stat": 0.5515463917525774,
+        "ks_pvalue": 0.0
+    },
+    "Contract_One year": {
+        "psi": 7.441866553260627e-05,
+        "ks_stat": 0.20583007465339495,
+        "ks_pvalue": 2.5193440517099724e-116
+    },
+    "Contract_Two year": {
+        "psi": 4.9338099212554805e-05,
+        "ks_stat": 0.24262353359402772,
+        "ks_pvalue": 6.521510002864319e-162
+    },
+    "PaperlessBilling_No": {
+        "psi": 3.19675802953124e-05,
+        "ks_stat": 0.4100604337006754,
+        "ks_pvalue": 2.594e-321
+    },
+    "PaperlessBilling_Yes": {
+        "psi": 3.19675802953124e-05,
+        "ks_stat": 0.5899395662993245,
+        "ks_pvalue": 0.0
+    },
+    "PaymentMethod_Bank transfer (automatic)": {
+        "psi": 9.84654351756719e-06,
+        "ks_stat": 0.2205830074653395,
+        "ks_pvalue": 1.1263318981848713e-133
+    },
+    "PaymentMethod_Credit card (automatic)": {
+        "psi": 7.495429748386058e-05,
+        "ks_stat": 0.21987202275151085,
+        "ks_pvalue": 8.245571654363369e-133
+    },
+    "PaymentMethod_Electronic check": {
+        "psi": 7.598597365906043e-05,
+        "ks_stat": 0.33220760753643797,
+        "ks_pvalue": 6.462064398125207e-306
+    },
+    "PaymentMethod_Mailed check": {
+        "psi": 3.3081913145530926e-06,
+        "ks_stat": 0.2273373622467117,
+        "ks_pvalue": 4.947036021641814e-142
+    },
+    "SeniorCitizen": {
+        "psi": 0.00013145560529799946,
+        "ks_stat": 0.8418059011731248,
+        "ks_pvalue": 0.0
+    },
+    "tenure": {
+        "psi": 0.00027483343559284276,
+        "ks_stat": 0.15019552079630288,
+        "ks_pvalue": 6.089396767992329e-62
+    },
+    "MonthlyCharges": {
+        "psi": 0.00016390718604904298,
+        "ks_stat": 0.14731548672727426,
+        "ks_pvalue": 1.3445254684011649e-59
+    },
+    "TotalCharges": {
+        "psi": 0.0004123056233729393,
+        "ks_stat": 0.14788482047635976,
+        "ks_pvalue": 4.6677751332696295e-60
+    }
+}
