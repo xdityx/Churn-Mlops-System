@@ -62,3 +62,14 @@ The system includes a data drift detection component that compares incoming prod
 ### Output
 - Feature-wise drift metrics are generated and persisted
 - These metrics provide the foundation for monitoring data quality and triggering retraining decisions
+
+## Prediction Drift Monitoring
+
+Beyond input data drift, the system monitors **prediction drift** by tracking changes in the model’s output probabilities over time.
+
+### Approach
+- Prediction probabilities are generated on both reference and production feature sets
+- Distribution statistics (mean, spread, range) are compared
+- Shifts in prediction behavior are quantified independently of input drift
+
+This enables early detection of silent model degradation, even when input features appear stable.
