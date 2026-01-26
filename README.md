@@ -73,3 +73,17 @@ Beyond input data drift, the system monitors **prediction drift** by tracking ch
 - Shifts in prediction behavior are quantified independently of input drift
 
 This enables early detection of silent model degradation, even when input features appear stable.
+
+## Alerting & Decision Rules
+
+The system converts monitoring signals into **actionable alerts** using predefined business rules.
+
+### Alert types
+- **Data drift alerts** based on Population Stability Index (PSI)
+- **Prediction drift alerts** based on shifts in model output probabilities
+
+### Purpose
+Alerts are designed to:
+- Highlight data quality risks
+- Surface silent model behavior changes
+- Guide retraining and intervention decisions without overreacting to noise
