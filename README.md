@@ -87,3 +87,18 @@ Alerts are designed to:
 - Highlight data quality risks
 - Surface silent model behavior changes
 - Guide retraining and intervention decisions without overreacting to noise
+
+
+## API Exposure
+
+The system exposes its core capabilities through a lightweight API layer.
+
+### Endpoints
+- `POST /predict`  
+  Returns churn probability and binary prediction for a given feature payload.
+
+- `GET /alerts`  
+  Surfaces the current alert state derived from data and prediction drift monitoring.
+
+### Purpose
+The API decouples monitoring and inference logic from presentation, allowing downstream systems, dashboards, or schedulers to consume model outputs and operational signals reliably.
