@@ -5,3 +5,4 @@ __pycache__/
 *.parquet
 .env
 .pytest_cache/
+mlruns/

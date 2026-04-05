@@ -36,5 +36,7 @@ def evaluate_model():
     print("Evaluation complete.")
     print(metrics)
 
+    return metrics
+
 if __name__ == "__main__":
     evaluate_model()
