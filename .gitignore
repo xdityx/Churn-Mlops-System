@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.pkl
+*.json
+*.parquet
+.env
+.pytest_cache/
