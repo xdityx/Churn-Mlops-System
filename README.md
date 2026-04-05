@@ -12,6 +12,27 @@ Instead of stopping at model training, the system is designed to reflect the ful
 
 The goal of the project is to demonstrate how machine learning models behave **after deployment**, how data changes over time, and how such changes can be detected and acted upon in a controlled, production-ready manner.
 
+## Getting Started
+
+### Prerequisites
+- Python 3.12
+- pip
+
+### Installation
+`pip install -r requirements.txt`
+
+### Run tests
+`python -m pytest tests/ -v`
+
+### Run MLflow tracking
+`python models/train_and_log.py`
+
+### Docker
+`docker build -t churn-mlops . && docker run --rm churn-mlops`
+
+### API
+`uvicorn api.app:app --reload`
+
 ## Feature Engineering & Reference Dataset
 
 This project includes a dedicated **feature engineering layer** that transforms raw customer data into model-ready features and produces a **reference feature dataset** representing the training-time data distribution.
