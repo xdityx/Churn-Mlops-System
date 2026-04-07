@@ -41,7 +41,7 @@ def detect_prediction_drift():
     with open(REPORT_PATH, "w") as f:
         json.dump(report, f, indent=4)
 
-    print(f"Prediction drift report saved → {REPORT_PATH}")
+    print(f"Prediction drift report saved -> {REPORT_PATH}")
     print(report)
 
 
