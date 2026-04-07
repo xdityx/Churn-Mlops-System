@@ -33,6 +33,18 @@ The goal of the project is to demonstrate how machine learning models behave **a
 ### API
 `uvicorn api.app:app --reload`
 
+## Orchestration
+
+Prefect pipeline orchestrates daily drift monitoring automatically.
+
+### How to run the pipeline
+`python orchestration/pipeline.py`
+
+### What it does
+- Runs data drift checks
+- Runs prediction drift checks
+- Triggers alerts if drift is detected
+
 ## Feature Engineering & Reference Dataset
 
 This project includes a dedicated **feature engineering layer** that transforms raw customer data into model-ready features and produces a **reference feature dataset** representing the training-time data distribution.
