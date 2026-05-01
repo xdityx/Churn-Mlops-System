@@ -6,6 +6,6 @@ pandas
 prefect==2.19.9
 pyarrow
 pytest
-scikit-learn
+scikit-learn==1.8.0
 scipy
 httpx 
