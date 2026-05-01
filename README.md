@@ -1,5 +1,7 @@
 # Churn MLOps System
 
+[![CI](https://github.com/xdityx/Churn-Mlops-System/actions/workflows/ci.yml/badge.svg)](https://github.com/xdityx/Churn-Mlops-System/actions/workflows/ci.yml)
+
 This project implements a **production-oriented machine learning system** for customer churn prediction, with a strong focus on **reliability, monitoring, and data quality**.
 
 Instead of stopping at model training, the system is designed to reflect the full machine learning lifecycle, including:
@@ -32,6 +34,40 @@ The goal of the project is to demonstrate how machine learning models behave **a
 
 ### API
 `uvicorn api.app:app --reload`
+
+## 🚀 Live API
+
+The Churn MLOps System is deployed and available at:
+
+**[https://churn-mlops-system.railway.app](https://churn-mlops-system.railway.app)**
+
+### API Documentation
+- **Interactive Swagger UI**: [https://churn-mlops-system.railway.app/docs](https://churn-mlops-system.railway.app/docs)
+- **OpenAPI Schema**: [https://churn-mlops-system.railway.app/openapi.json](https://churn-mlops-system.railway.app/openapi.json)
+
+### Example Usage
+
+**Health Check**
+```bash
+curl https://churn-mlops-system.railway.app/
+```
+
+**Get Predictions**
+```bash
+curl -X POST https://churn-mlops-system.railway.app/predict \
+  -H "Content-Type: application/json" \
+  -d '{"tenure": 12, "MonthlyCharges": 65.5, ...}'
+```
+
+**Get Alerts**
+```bash
+curl https://churn-mlops-system.railway.app/alerts
+```
+
+### Deployment Details
+- **Platform**: Railway.app
+- **CI/CD**: GitHub Actions (automatic deployment on push to main)
+- **Monitoring**: Real-time alerts on data drift and prediction drift
 
 ## Orchestration
 
