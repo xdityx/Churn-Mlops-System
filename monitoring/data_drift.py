@@ -1,3 +1,4 @@
+"""Data drift detection using PSI and Kolmogorov-Smirnov tests."""
 import json
 import numpy as np
 import pandas as pd
@@ -9,6 +10,22 @@ REPORT_PATH = "monitoring/data_drift_report.json"
 
 
 def calculate_psi(expected, actual, buckets=10):
+    """Calculate Population Stability Index between two distributions.
+
+    PSI measures distributional shift. Values >0.3 indicate significant drift.
+
+    Args:
+        expected: Reference distribution array.
+        actual: Production distribution array.
+        buckets: Number of histogram bins (default: 10).
+
+    Returns:
+        float: PSI value. Interpretation: <0.1 (no drift), 0.1-0.2 (small),
+               0.2-0.3 (moderate), >0.3 (significant).
+
+    Example:
+        psi = calculate_psi(ref_data, prod_data)  # Returns: 0.25
+    """
     expected_percents, _ = np.histogram(expected, bins=buckets)
     actual_percents, _ = np.histogram(actual, bins=buckets)
 
@@ -23,6 +40,21 @@ def calculate_psi(expected, actual, buckets=10):
 
 
 def create_production_snapshot():
+    """Create simulated production data by sampling and perturbing reference data.
+
+    Samples 80% of reference data and applies random Gaussian noise to numeric
+    features (mean=1.05, std=0.02) to simulate realistic production drift.
+
+    Returns:
+        None. Saves production snapshot to PRODUCTION_PATH.
+
+    Raises:
+        FileNotFoundError: If REFERENCE_PATH does not exist.
+
+    Example:
+        create_production_snapshot()
+        # Outputs: Production snapshot saved -> data/production/production_features.parquet
+    """
     ref = pd.read_parquet(REFERENCE_PATH)
 
     prod = ref.sample(frac=0.8, random_state=42).copy()
@@ -38,6 +70,21 @@ def create_production_snapshot():
 
 
 def detect_data_drift():
+    """Compare reference and production distributions, compute PSI and KS statistics.
+
+    Calculates Population Stability Index and Kolmogorov-Smirnov test statistics
+    for each feature to detect distributional shifts between training and production data.
+
+    Returns:
+        None. Saves drift report (dict of feature -> metrics) to REPORT_PATH.
+
+    Raises:
+        FileNotFoundError: If REFERENCE_PATH or PRODUCTION_PATH do not exist.
+
+    Example:
+        detect_data_drift()
+        # Outputs: Data drift report saved -> monitoring/data_drift_report.json
+    """
     ref = pd.read_parquet(REFERENCE_PATH)
     prod = pd.read_parquet(PRODUCTION_PATH)
 

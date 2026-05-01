@@ -1,3 +1,4 @@
+"""Model training for churn prediction."""
 import joblib
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -9,6 +10,23 @@ MODEL_OUTPUT_PATH = "models/model.pkl"
 
 
 def train_model():
+    """Train logistic regression model on reference features.
+
+    Loads preprocessed reference features, splits into train/test (80/20),
+    trains LogisticRegression with max_iter=2000, and computes evaluation metrics.
+
+    Returns:
+        dict: Contains precision, recall, roc_auc (float values 0-1) and
+              confusion_matrix (2x2 list). All metrics computed on test split.
+
+    Raises:
+        FileNotFoundError: If REFERENCE_DATA_PATH does not exist.
+        ValueError: If target column 'Churn' is missing.
+
+    Example:
+        metrics = train_model()
+        # Returns: {"precision": 0.85, "recall": 0.72, "roc_auc": 0.88, ...}
+    """
     df = pd.read_parquet(REFERENCE_DATA_PATH)
 
     X = df.drop(columns=["Churn"])

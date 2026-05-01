@@ -1,3 +1,4 @@
+"""Feature engineering for churn prediction model."""
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -7,6 +8,27 @@ REFERENCE_OUTPUT_PATH = "data/reference/reference_features.parquet"
 
 
 def build_reference_features():
+    """Load raw data, preprocess, and save reference features.
+
+    Performs the following operations:
+    1. Loads raw telco churn dataset
+    2. Removes customer ID and encodes target variable
+    3. Converts TotalCharges to numeric and removes missing values
+    4. One-hot encodes categorical features
+    5. Standardizes numerical features
+    6. Saves processed features to parquet for model training and monitoring
+
+    Returns:
+        None. Saves reference features to REFERENCE_OUTPUT_PATH.
+
+    Raises:
+        FileNotFoundError: If RAW_DATA_PATH does not exist.
+        ValueError: If required columns are missing from raw data.
+
+    Example:
+        build_reference_features()
+        # Outputs: Reference features saved -> data/reference/reference_features.parquet
+    """
     df = pd.read_csv(RAW_DATA_PATH)
 
     df = df.drop(columns=["customerID"], errors="ignore")

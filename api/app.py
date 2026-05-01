@@ -1,3 +1,4 @@
+"""Churn MLOps API for model inference and monitoring exposure."""
 from fastapi import FastAPI
 import joblib
 import json
@@ -22,13 +23,33 @@ FEATURE_COLUMNS = [c for c in _reference_df.columns if c != "Churn"]
 
 @app.get("/")
 def health():
+    """Health check endpoint.
+
+    Returns:
+        dict: Status and message indicating API is running.
+
+    Example:
+        GET / -> {"status": "ok", "message": "Churn MLOps API is running"}
+    """
     return {"status": "ok", "message": "Churn MLOps API is running"}
 
 
 @app.post("/predict")
 def predict(payload: dict):
-    """
-    Expects a JSON object with feature_name: value pairs
+    """Generate churn prediction from customer features.
+
+    Args:
+        payload: JSON object with feature_name: value pairs matching reference schema.
+
+    Returns:
+        dict: Contains churn_probability (float 0-1) and churn_prediction (0 or 1).
+
+    Raises:
+        ValueError: If required features are missing or invalid.
+
+    Example:
+        POST /predict with {"tenure": 12, "MonthlyCharges": 65.5, ...}
+        -> {"churn_probability": 0.72, "churn_prediction": 1}
     """
     df = pd.DataFrame([payload])
 
@@ -45,8 +66,14 @@ def predict(payload: dict):
 
 @app.get("/alerts")
 def get_alerts():
-    """
-    Returns the latest alerting state
+    """Retrieve latest monitoring and alerting state.
+
+    Returns:
+        dict: Contains total_alerts count and list of alert objects.
+              Each alert has type, severity, and message fields.
+
+    Example:
+        GET /alerts -> {"total_alerts": 2, "alerts": [...]}
     """
     try:
         with open(ALERTS_PATH, "r") as f:
