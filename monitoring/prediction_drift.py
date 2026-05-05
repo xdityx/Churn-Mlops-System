@@ -10,6 +10,17 @@ REPORT_PATH = "monitoring/prediction_drift_report.json"
 
 
 def load_predictions(data_path):
+    """Loads data and returns model predictions (churn probabilities).
+
+    Reads parquet data, removes the target column, loads the trained model,
+    and generates churn probability predictions for all samples.
+
+    Args:
+        data_path: File path to the parquet data file.
+
+    Returns:
+        numpy.ndarray: Churn probability predictions for each sample (values 0-1).
+    """
     df = pd.read_parquet(data_path)
     X = df.drop(columns=["Churn"], errors="ignore")
 
@@ -20,6 +31,17 @@ def load_predictions(data_path):
 
 
 def calculate_distribution_stats(preds):
+    """Calculates summary statistics of prediction distribution.
+
+    Computes mean, standard deviation, minimum, and maximum values for a set of
+    predictions to characterize the distribution shape.
+
+    Args:
+        preds: Array of prediction values.
+
+    Returns:
+        dict: Dictionary with "mean", "std", "min", and "max" keys.
+    """
     return {
         "mean": float(np.mean(preds)),
         "std": float(np.std(preds)),
@@ -29,6 +51,15 @@ def calculate_distribution_stats(preds):
 
 
 def detect_prediction_drift():
+    """Detects prediction drift by comparing reference and production predictions.
+
+    Generates predictions on both reference and production datasets, computes
+    distribution statistics for each, and calculates mean shift. Persists the
+    comprehensive drift report to disk.
+
+    Returns:
+        None
+    """
     ref_preds = load_predictions(REFERENCE_DATA_PATH)
     prod_preds = load_predictions(PRODUCTION_DATA_PATH)
 

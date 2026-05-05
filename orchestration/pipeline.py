@@ -27,6 +27,15 @@ from monitoring import alerting, data_drift, prediction_drift
 
 
 def _patch_prefect_parameter_schema_for_pydantic_v2():
+    """Patches Prefect's parameter schema generation for Pydantic v2 compatibility.
+
+    Internal compatibility layer that overrides Prefect's parameter schema
+    generation functions to handle Pydantic v2 gracefully. Enables the Prefect
+    flow to run with modern Pydantic versions.
+
+    Returns:
+        None
+    """
     if not prefect_callables.HAS_PYDANTIC_V2:
         return
 
@@ -87,6 +96,14 @@ _patch_prefect_parameter_schema_for_pydantic_v2()
 
 @task
 def run_data_drift_check():
+    """Prefect task that runs data drift detection pipeline.
+
+    Creates a production data snapshot with simulated drift, detects feature-level
+    drift using PSI and KS test, and returns the generated drift report.
+
+    Returns:
+        dict: Data drift report mapping features to PSI, KS statistics, and p-values.
+    """
     data_drift.create_production_snapshot()
     data_drift.detect_data_drift()
     return alerting.load_json(data_drift.REPORT_PATH)
@@ -94,12 +111,34 @@ def run_data_drift_check():
 
 @task
 def run_prediction_drift_check():
+    """Prefect task that runs prediction drift detection pipeline.
+
+    Generates model predictions on reference and production data, computes
+    distribution statistics for each, calculates mean shift, and returns the
+    generated drift report.
+
+    Returns:
+        dict: Prediction drift report with reference/production stats and mean shift.
+    """
     prediction_drift.detect_prediction_drift()
     return alerting.load_json(prediction_drift.REPORT_PATH)
 
 
 @task
 def trigger_alerting_if_needed(data_report, prediction_report):
+    """Prefect task that triggers alerting if drift is detected.
+
+    Evaluates both data and prediction drift reports against severity thresholds.
+    If any alerts are generated, persists the complete alert summary to disk.
+
+    Args:
+        data_report: Data drift report dictionary from run_data_drift_check.
+        prediction_report: Prediction drift report dictionary from
+                          run_prediction_drift_check.
+
+    Returns:
+        dict: Summary with "drift_detected" boolean and "total_alerts" count.
+    """
     data_alerts = alerting.evaluate_data_drift(data_report)
     prediction_alerts = alerting.evaluate_prediction_drift(prediction_report)
     total_alerts = len(data_alerts) + len(prediction_alerts)
@@ -115,6 +154,15 @@ def trigger_alerting_if_needed(data_report, prediction_report):
 
 @flow(name="churn-monitoring-flow")
 def churn_monitoring_flow():
+    """Main Prefect flow that orchestrates daily churn model monitoring.
+
+    Executes the complete monitoring pipeline: detects data drift, detects
+    prediction drift, and triggers alerting if drift thresholds are breached.
+    Designed to run daily as a scheduled job.
+
+    Returns:
+        dict: Alerting summary with drift_detected flag and total_alerts count.
+    """
     data_report = run_data_drift_check()
     prediction_report = run_prediction_drift_check()
     return trigger_alerting_if_needed(data_report, prediction_report)

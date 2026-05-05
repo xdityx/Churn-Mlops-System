@@ -22,13 +22,30 @@ FEATURE_COLUMNS = [c for c in _reference_df.columns if c != "Churn"]
 
 @app.get("/")
 def health():
+    """Returns API health status.
+
+    Indicates whether the Churn MLOps API service is operational and ready to
+    accept requests.
+
+    Returns:
+        dict: Status dictionary with "status" and "message" fields.
+    """
     return {"status": "ok", "message": "Churn MLOps API is running"}
 
 
 @app.post("/predict")
 def predict(payload: dict):
-    """
-    Expects a JSON object with feature_name: value pairs
+    """Predicts churn probability for a customer.
+
+    Accepts customer features and returns the probability of churn along with
+    a binary prediction. Missing features are filled with zero values.
+
+    Args:
+        payload: Dictionary with feature names as keys and feature values.
+
+    Returns:
+        dict: Dictionary containing "churn_probability" (float 0-1) and
+              "churn_prediction" (int 0 or 1).
     """
     df = pd.DataFrame([payload])
 
@@ -45,8 +62,14 @@ def predict(payload: dict):
 
 @app.get("/alerts")
 def get_alerts():
-    """
-    Returns the latest alerting state
+    """Returns the latest alerting state.
+
+    Reads the alerts JSON file to return all currently active alerts from data
+    and prediction drift detection. Returns an empty alert list if no alerts exist.
+
+    Returns:
+        dict: Dictionary with "total_alerts" count and "alerts" list of
+              alert objects.
     """
     try:
         with open(ALERTS_PATH, "r") as f:

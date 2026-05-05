@@ -7,6 +7,15 @@ REFERENCE_OUTPUT_PATH = "data/reference/reference_features.parquet"
 
 
 def build_reference_features():
+    """Builds and saves reference features for training and monitoring.
+
+    Loads raw telco churn data, applies preprocessing (type conversion, missing
+    value handling), and applies one-hot and standard scaling transformations.
+    Saves the processed features to a parquet file.
+
+    Returns:
+        None
+    """
     df = pd.read_csv(RAW_DATA_PATH)
 
     df = df.drop(columns=["customerID"], errors="ignore")

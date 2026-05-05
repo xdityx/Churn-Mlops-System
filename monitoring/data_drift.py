@@ -9,6 +9,20 @@ REPORT_PATH = "monitoring/data_drift_report.json"
 
 
 def calculate_psi(expected, actual, buckets=10):
+    """Calculates Population Stability Index (PSI) between two distributions.
+
+    Computes PSI metric to quantify distributional shift. PSI > 0.1 indicates
+    significant change, PSI > 0.25 indicates major change. Uses histogram-based
+    binning with log-ratio of percentages.
+
+    Args:
+        expected: Reference distribution array.
+        actual: Actual/production distribution array.
+        buckets: Number of histogram bins for comparison (default 10).
+
+    Returns:
+        float: PSI value measuring distribution divergence.
+    """
     expected_percents, _ = np.histogram(expected, bins=buckets)
     actual_percents, _ = np.histogram(actual, bins=buckets)
 
@@ -23,6 +37,15 @@ def calculate_psi(expected, actual, buckets=10):
 
 
 def create_production_snapshot():
+    """Creates a synthetic production dataset with simulated data drift.
+
+    Loads reference data, samples 80% of it, applies a normal multiplier (mean
+    1.05, std 0.02) to numeric features to simulate production shift. Saves
+    the drifted snapshot for drift detection benchmarking.
+
+    Returns:
+        None
+    """
     ref = pd.read_parquet(REFERENCE_PATH)
 
     prod = ref.sample(frac=0.8, random_state=42).copy()
@@ -38,6 +61,15 @@ def create_production_snapshot():
 
 
 def detect_data_drift():
+    """Detects data drift by comparing reference and production feature distributions.
+
+    Compares each feature between reference and production data using PSI and
+    Kolmogorov-Smirnov test. Generates a comprehensive drift report with both
+    metrics and persists it to disk.
+
+    Returns:
+        None
+    """
     ref = pd.read_parquet(REFERENCE_PATH)
     prod = pd.read_parquet(PRODUCTION_PATH)
 

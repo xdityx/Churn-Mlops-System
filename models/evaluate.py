@@ -9,6 +9,16 @@ MODEL_PATH = "models/model.pkl"
 METRICS_OUTPUT_PATH = "models/evaluation_metrics.json"
 
 def evaluate_model():
+    """Evaluates the trained model on a test set.
+
+    Loads the trained model and reference features, splits into train/test sets,
+    and computes precision, recall, ROC-AUC, and confusion matrix. Saves metrics
+    to a JSON file and returns them.
+
+    Returns:
+        dict: Evaluation metrics containing "precision", "recall", "roc_auc",
+              and "confusion_matrix".
+    """
     df = pd.read_parquet(REFERENCE_DATA_PATH)
 
     X = df.drop(columns=["Churn"])

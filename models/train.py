@@ -9,6 +9,16 @@ MODEL_OUTPUT_PATH = "models/model.pkl"
 
 
 def train_model():
+    """Trains a logistic regression model and saves it.
+
+    Loads reference features, splits into train/test sets, trains a logistic
+    regression model, and evaluates performance. Saves the trained model to disk
+    and returns evaluation metrics.
+
+    Returns:
+        dict: Training metrics containing "precision", "recall", "roc_auc",
+              and "confusion_matrix".
+    """
     df = pd.read_parquet(REFERENCE_DATA_PATH)
 
     X = df.drop(columns=["Churn"])

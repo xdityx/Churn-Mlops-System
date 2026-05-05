@@ -7,11 +7,35 @@ ALERT_OUTPUT = "monitoring/alerts.json"
 
 
 def load_json(path):
+    """Loads and returns a JSON file as a dictionary.
+
+    Simple utility function to read JSON from disk.
+
+    Args:
+        path: File path to the JSON file.
+
+    Returns:
+        dict: Parsed JSON contents as a dictionary.
+    """
     with open(path, "r") as f:
         return json.load(f)
 
 
 def evaluate_data_drift(drift_report):
+    """Evaluates data drift report and generates alerts based on PSI thresholds.
+
+    Parses the drift report and creates critical alerts for PSI >= 0.3 and
+    warning alerts for PSI >= 0.2. Each alert includes feature name, PSI value,
+    and severity.
+
+    Args:
+        drift_report: Dictionary mapping feature names to drift metrics containing
+                     "psi" values.
+
+    Returns:
+        list: List of alert dictionaries with type, severity, feature, psi, and
+              message fields.
+    """
     alerts = []
 
     for feature, metrics in drift_report.items():
@@ -38,6 +62,20 @@ def evaluate_data_drift(drift_report):
 
 
 def evaluate_prediction_drift(pred_report):
+    """Evaluates prediction drift report and generates alerts based on mean shift.
+
+    Parses the prediction drift report and creates critical alerts for mean shift
+    >= 0.10 and warning alerts for mean shift >= 0.05. Each alert documents the
+    magnitude of shift and its business impact.
+
+    Args:
+        pred_report: Dictionary containing "mean_shift" value calculated from
+                    reference vs production predictions.
+
+    Returns:
+        list: List of alert dictionaries with type, severity, mean_shift, and
+              message fields.
+    """
     alerts = []
 
     mean_shift = abs(pred_report.get("mean_shift", 0.0))
@@ -61,6 +99,14 @@ def evaluate_prediction_drift(pred_report):
 
 
 def run_alerting():
+    """Orchestrates alerting by evaluating both data and prediction drift reports.
+
+    Loads drift detection reports, evaluates them for alert conditions, combines
+    all alerts, and persists the alert summary to a JSON file.
+
+    Returns:
+        None
+    """
     data_drift = load_json(DATA_DRIFT_REPORT)
     pred_drift = load_json(PRED_DRIFT_REPORT)
 

@@ -19,6 +19,15 @@ EXPERIMENT_NAME = "churn-mlops"
 
 
 def train_and_log():
+    """Trains model and logs parameters and metrics to MLflow.
+
+    Orchestrates the complete model training pipeline: builds reference features,
+    trains the model, evaluates performance, and logs all parameters and metrics
+    to MLflow for experiment tracking.
+
+    Returns:
+        dict: Evaluation metrics containing "precision", "recall", and "roc_auc".
+    """
     mlflow.set_tracking_uri(TRACKING_URI)
     mlflow.set_experiment(EXPERIMENT_NAME)
 
